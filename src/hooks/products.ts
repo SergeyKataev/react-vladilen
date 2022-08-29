@@ -2,9 +2,16 @@ import {useEffect, useState} from "react";
 import {IProduct} from "../../models";
 import axios from "axios";
 
+
+
+
 export function useProducts() {
     const [products, setProducts] = useState<IProduct[]>([])
     const [loading, setLoading] = useState(false)
+
+    function addProduct(product: IProduct) {
+        setProducts(prev => [...prev, product] )
+    }
 
     async function fetchProducts() {
         setLoading(true)
@@ -18,5 +25,5 @@ export function useProducts() {
         fetchProducts()
     }, [])
 
-    return {products, loading}
+    return {products, loading, addProduct}
 }
